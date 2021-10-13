@@ -1,0 +1,242 @@
+@prefix : <http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#> .
+
+<http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#> rdf:type owl:Ontology ;
+                                                                      owl:imports <http://www.w3.org/2006/time#2016> ,
+                                                                                  <http://www.w3.org/ns/ssn/> ,
+                                                                                  <http://www.ontology-of-units-of-measure.org/resource/om-2/> ;
+                                                                      <http://purl.org/dc/terms/creator> "Sander Vanden Hautte" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#accepts
+:accepts rdf:type owl:ObjectProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :AggregatedObservableProperty
+                                     :VisualizationComponent
+                                   )
+                     ] .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#candidateVisualization
+:candidateVisualization rdf:type owl:ObjectProperty ;
+                        rdfs:domain :Widget ;
+                        rdfs:range :Visualization .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#component
+:component rdf:type owl:ObjectProperty ;
+           rdfs:domain :Visualization ;
+           rdfs:range :VisualizationComponent .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#dataSource
+:dataSource rdf:type owl:ObjectProperty ;
+            rdfs:domain :Widget ;
+            rdfs:range <http://www.w3.org/ns/ssn/Property> .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#processor
+:processor rdf:type owl:ObjectProperty ;
+           rdfs:domain :ProcessedObservableProperty ;
+           rdfs:range :Processor .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#produces
+:produces rdf:type owl:ObjectProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :AggregatedObservableProperty
+                                      <http://www.w3.org/ns/sosa/ObservableProperty>
+                                    )
+                      ] .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#source
+:source rdf:type owl:ObjectProperty ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :ProcessedObservableProperty
+                                    :Visualization
+                                  )
+                    ] ;
+        rdfs:range <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#timeWindow
+:timeWindow rdf:type owl:ObjectProperty ;
+            rdfs:domain :Widget ;
+            rdfs:range <http://www.w3.org/2006/time#TemporalEntity> .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#datatype
+:datatype rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Metric .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#max
+:max rdf:type owl:DatatypeProperty ;
+     rdfs:domain :VisualizationComponent ;
+     rdfs:range xsd:nonNegativeInteger .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#min
+:min rdf:type owl:DatatypeProperty ;
+     rdfs:domain :VisualizationComponent ;
+     rdfs:range xsd:nonNegativeInteger .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#AggregatedObservableProperty
+:AggregatedObservableProperty rdf:type owl:Class ;
+                              rdfs:subClassOf :ProcessedObservableProperty .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Aggregator
+:Aggregator rdf:type owl:Class ;
+            rdfs:subClassOf :Processor .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#ColumnChart
+:ColumnChart rdf:type owl:Class ;
+             rdfs:subClassOf :Visualization ;
+             rdfs:label "Column chart"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays one or more quantities with a column (vertical bar), next to each other if there are multiple."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#ConvertedObservableProperty
+:ConvertedObservableProperty rdf:type owl:Class ;
+                             rdfs:subClassOf :ProcessedObservableProperty .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Convertor
+:Convertor rdf:type owl:Class ;
+           rdfs:subClassOf :Processor .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Gauge
+:Gauge rdf:type owl:Class ;
+       rdfs:subClassOf :Visualization ;
+       rdfs:label "Gauge"@en ;
+       <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays any quantity on a round axis."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#HistoricalDataVisualization
+:HistoricalDataVisualization rdf:type owl:Class ;
+                             rdfs:subClassOf :Visualization ;
+                             owl:disjointWith :RealtimeDataVisualization .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#LineChart
+:LineChart rdf:type owl:Class ;
+           rdfs:subClassOf :Visualization ;
+           rdfs:label "Line chart"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays any quantity, usually against time, on a orthagonal 2-axis plotting space."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Map
+:Map rdf:type owl:Class ;
+     rdfs:subClassOf :Visualization ;
+     rdfs:label "Map"@en ;
+     <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays locations, using their latitude and longitude."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Metric
+:Metric rdf:type owl:Class .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#PieChart
+:PieChart rdf:type owl:Class ;
+          rdfs:subClassOf :Visualization ;
+          rdfs:label "Pie chart"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays a pie, divided in slices corresponding with quantities that have been observed."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#ProcessedObservableProperty
+:ProcessedObservableProperty rdf:type owl:Class ;
+                             rdfs:subClassOf <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Processor
+:Processor rdf:type owl:Class ;
+           rdfs:subClassOf <http://www.w3.org/ns/sosa/Sensor> .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#QualitativeMetric
+:QualitativeMetric rdf:type owl:Class ;
+                   rdfs:subClassOf :Metric .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#QuantitativeMetric
+:QuantitativeMetric rdf:type owl:Class ;
+                    owl:equivalentClass <http://www.ontology-of-units-of-measure.org/resource/om-2/Quantity> ;
+                    rdfs:subClassOf :Metric .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#RealtimeDataVisualization
+:RealtimeDataVisualization rdf:type owl:Class ;
+                           rdfs:subClassOf :Visualization .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#ScatterPlot
+:ScatterPlot rdf:type owl:Class ;
+             rdfs:subClassOf :Visualization ;
+             rdfs:label "Scatter plot"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays all observed data points of a certain quantity."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#TableVisualization
+:TableVisualization rdf:type owl:Class ;
+                    rdfs:subClassOf :Visualization ;
+                    rdfs:label "Table"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "A visualization that can display multiple pieces of data on a grid."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#TextualObservationVisualization
+:TextualObservationVisualization rdf:type owl:Class ;
+                                 rdfs:subClassOf :Visualization ;
+                                 rdfs:label "Textual observation display"@en ;
+                                 <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays observations as text (e.g. \"37.1 °C\")."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Thermometer
+:Thermometer rdf:type owl:Class ;
+             rdfs:subClassOf :Visualization ;
+             rdfs:label "Thermometer"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays temperatures."@en .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Visualization
+:Visualization rdf:type owl:Class .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#VisualizationComponent
+:VisualizationComponent rdf:type owl:Class .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#Widget
+:Widget rdf:type owl:Class .
+
+
+###  http://dynamicdashboard.ilabt.imec.be/broker/ontologies/dashboard#WindRose
+:WindRose rdf:type owl:Class ;
+          rdfs:subClassOf :Visualization ;
+          rdfs:label "Wind rose"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays wind directions, sometimes combined with wind speeds."@en .
+
+
+###  http://www.ontology-of-units-of-measure.org/resource/om-2/Quantity
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
