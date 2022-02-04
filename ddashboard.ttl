@@ -1,0 +1,322 @@
+@prefix : <https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard> .
+@prefix om2: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix dashb: <https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#> .
+@base <https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard> .
+
+<https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard> rdf:type owl:Ontology ;
+    rdfs:label "Dashboard ontology"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#definition
+<http://www.w3.org/2004/02/skos/core#definition> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#accepts
+dashb:accepts rdf:type owl:ObjectProperty ;
+              rdfs:label "accepts" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#component
+dashb:component rdf:type owl:ObjectProperty ;
+                rdfs:label "component" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#createdBy
+dashb:createdBy rdf:type owl:ObjectProperty ;
+                rdfs:label "createdBy" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#hasAggregator
+dashb:hasAggregator rdf:type owl:ObjectProperty ;
+                    rdfs:label "hasAggregator" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#hasProperty
+dashb:hasProperty rdf:type owl:ObjectProperty ;
+                  rdfs:label "hasProperty" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#hasTab
+dashb:hasTab rdf:type owl:ObjectProperty ;
+             rdfs:label "hasTab" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#hasWidget
+dashb:hasWidget rdf:type owl:ObjectProperty ;
+                rdfs:label "hasWidget" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#memberOf
+dashb:memberOf rdf:type owl:ObjectProperty .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#produces
+dashb:produces rdf:type owl:ObjectProperty .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#visualizedBy
+dashb:visualizedBy rdf:type owl:ObjectProperty ;
+                   rdfs:label "visualizedBy" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#datatype
+dashb:datatype rdf:type owl:DatatypeProperty .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#hasBoundaryLabel
+dashb:hasBoundaryLabel rdf:type owl:DatatypeProperty ;
+                       rdfs:label "hasBoundaryLabel" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#hasMaxBoundary
+dashb:hasMaxBoundary rdf:type owl:DatatypeProperty ;
+                     rdfs:label "hasMaxBoundary" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#hasMinBoundary
+dashb:hasMinBoundary rdf:type owl:DatatypeProperty ;
+                     rdfs:label "hasMinBoundary" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#implementation
+dashb:implementation rdf:type owl:DatatypeProperty .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#language
+dashb:language rdf:type owl:DatatypeProperty ;
+               rdfs:label "language" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#max
+dashb:max rdf:type owl:DatatypeProperty ;
+          rdfs:label "max" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#min
+dashb:min rdf:type owl:DatatypeProperty ;
+          rdfs:label "min" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#source
+dashb:source rdf:type owl:DatatypeProperty ;
+             rdfs:label "source" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/ns/sosa/ObservableProperty
+sosa:ObservableProperty rdf:type owl:Class ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty dashb:produces ;
+                                          owl:someValuesFrom dashb:Metric
+                                        ] ;
+                        rdfs:label "ObservableProperty" .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Aggregator
+dashb:Aggregator rdf:type owl:Class ;
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty dashb:accepts ;
+                                   owl:someValuesFrom dashb:Metric
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty dashb:produces ;
+                                   owl:someValuesFrom dashb:Metric
+                                 ] ;
+                 rdfs:label "Aggregator"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Dashboard
+dashb:Dashboard rdf:type owl:Class ;
+                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                  owl:onProperty dashb:hasTab ;
+                                  owl:someValuesFrom dashb:Tab
+                                ] ;
+                rdfs:label "Dashboard"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#EventVisualization
+dashb:EventVisualization rdf:type owl:Class ;
+                         rdfs:subClassOf dashb:Visualization ;
+                         rdfs:label "Event visualization"^^xsd:string .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Gauge
+dashb:Gauge rdf:type owl:Class ;
+            rdfs:subClassOf dashb:RealtimeDataVisualization ;
+            rdfs:label "Gauge"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays any quantity on a round axis."@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#HistoricalDataVisualization
+dashb:HistoricalDataVisualization rdf:type owl:Class ;
+                                  rdfs:subClassOf dashb:Visualization ;
+                                  rdfs:label "Historical data visualization"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#LineChart
+dashb:LineChart rdf:type owl:Class ;
+                rdfs:subClassOf dashb:HistoricalDataVisualization ,
+                                dashb:RealtimeDataVisualization ;
+                rdfs:label "Line chart"@en ;
+                <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays any quantity, usually against time, on a orthogonal 2-axis plotting space."@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Map
+dashb:Map rdf:type owl:Class ;
+          rdfs:subClassOf dashb:RealtimeDataVisualization ;
+          rdfs:label "Map"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays locations, using their latitude and longitude."@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Metric
+dashb:Metric rdf:type owl:Class ;
+             rdfs:label "Metric"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#ObservationBoundary
+dashb:ObservationBoundary rdf:type owl:Class ;
+                          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                            owl:onProperty dashb:hasBoundaryLabel ;
+                                            owl:someValuesFrom rdfs:Literal
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty dashb:hasMaxBoundary ;
+                                            owl:someValuesFrom rdfs:Literal
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty dashb:hasMinBoundary ;
+                                            owl:someValuesFrom rdfs:Literal
+                                          ] ;
+                          rdfs:label "Observation boundary"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#PieChart
+dashb:PieChart rdf:type owl:Class ;
+               rdfs:subClassOf dashb:HistoricalDataVisualization ,
+                               dashb:RealtimeDataVisualization ;
+               rdfs:label "Pie chart"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays a pie, divided in slices corresponding with quantities that have been observed."@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#RealtimeDataVisualization
+dashb:RealtimeDataVisualization rdf:type owl:Class ;
+                                rdfs:subClassOf dashb:Visualization ;
+                                rdfs:label "Realtime data visualization"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#ScatterPlot
+dashb:ScatterPlot rdf:type owl:Class ;
+                  rdfs:subClassOf dashb:RealtimeDataVisualization ;
+                  rdfs:label "Scatter plot"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays all observed data points of a certain quantity."@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Tab
+dashb:Tab rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty dashb:hasWidget ;
+                            owl:someValuesFrom dashb:Widget
+                          ] ;
+          rdfs:label "Tab"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Thermometer
+dashb:Thermometer rdf:type owl:Class ;
+                  rdfs:subClassOf dashb:RealtimeDataVisualization ;
+                  rdfs:label "Thermometer"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays temperatures."@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#User
+dashb:User rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty dashb:memberOf ;
+                             owl:someValuesFrom dashb:UserGroup
+                           ] ;
+           rdfs:label "User"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#UserGroup
+dashb:UserGroup rdf:type owl:Class ;
+                rdfs:label "User group"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Visualization
+dashb:Visualization rdf:type owl:Class ;
+                    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                      owl:onProperty dashb:component ;
+                                      owl:someValuesFrom dashb:VisualizationComponent
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty dashb:implementation ;
+                                      owl:someValuesFrom xsd:anyURI
+                                    ] ;
+                    rdfs:label "Visualization"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#VisualizationComponent
+dashb:VisualizationComponent rdf:type owl:Class ;
+                             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                               owl:onProperty dashb:accepts ;
+                                               owl:someValuesFrom dashb:Metric
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty dashb:max ;
+                                               owl:someValuesFrom rdfs:Literal
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty dashb:min ;
+                                               owl:someValuesFrom rdfs:Literal
+                                             ] ;
+                             rdfs:label "Visualization component"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#Widget
+dashb:Widget rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                               owl:onProperty dashb:createdBy ;
+                               owl:someValuesFrom dashb:User
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty dashb:hasAggregator ;
+                               owl:someValuesFrom dashb:Aggregator
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty dashb:hasProperty ;
+                               owl:someValuesFrom sosa:ObservableProperty
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty dashb:visualizedBy ;
+                               owl:someValuesFrom dashb:Visualization
+                             ] ;
+             rdfs:label "Widget"@en .
+
+
+###  https://reasoner.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#WindRose
+dashb:WindRose rdf:type owl:Class ;
+               rdfs:subClassOf dashb:RealtimeDataVisualization ;
+               rdfs:label "Wind rose"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "A visualization that displays wind directions, sometimes combined with wind speeds."@en .
+
+
+###  Generated by the OWL API (version 4.5.13) https://github.com/owlcs/owlapi
