@@ -10,7 +10,7 @@
 @base <https://docs.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#> .
 
 : rdf:type owl:Ontology ;
-  rdfs:label "Dynamic Dashboard ontology" ;
+  rdfs:label "The Dynamic Dashboard Ontology" ;
   owl:imports <http://www.w3.org/2006/time#2016> ,
               <http://www.w3.org/ns/ssn/> ,
               <http://www.ontology-of-units-of-measure.org/resource/om-2/> ;

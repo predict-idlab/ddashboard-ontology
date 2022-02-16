@@ -8,7 +8,7 @@
 @base <https://docs.dynamicdashboard.ilabt.imec.be/ontologies/visualizations#> .
 
 : rdf:type owl:Ontology ;
-  rdfs:label "Dynamic Dashboard Visualizations ontology" ;
+  rdfs:label "The Dynamic Dashboard Visualizations Ontology" ;
   owl:imports <https://docs.dynamicdashboard.ilabt.imec.be/ontologies/dashboard#> ;
   <http://purl.org/dc/terms/creator> "Sander Vanden Hautte", "Pieter Moens", "Emile Deman" .
 
